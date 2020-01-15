@@ -1,4 +1,4 @@
-/* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
+// /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 
 {
   'use strict';
@@ -52,7 +52,35 @@
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
 
+  class Product {
+    constructor(id, data){
+      const thisProduct = this;
+      thisProduct.id = id;
+      thisProduct.data = data;
+      thisProduct.rebderInMenu();
+      console.log('new product:', thisProduct);
+    }
+    rebderInMenu(){
+      const thisProduct = this;
+      const ganeratedHTML = templates.menuProduct(thisProduct.data);
+      const menuContainer = document.querySelector(select.containerOf.menu);
+      thisProduct.element = utils.createDOMFromHTML(ganeratedHTML);
+      menuContainer.appendChild(thisProduct.element);
+    }
+  }
+
   const app = {
+    initData: function(){
+      const thisApp = this;
+      thisApp.data = dataSource;
+    },
+    initMenu: function(){
+      const thisApp = this;
+      console.log('thisApp.data:', thisApp.data);
+      for(let productData in thisApp.data.products){
+        new Product(productData, thisApp.data.products[productData]);
+      }
+    },
     init: function(){
       const thisApp = this;
       console.log('*** App starting ***');
@@ -60,6 +88,8 @@
       console.log('classNames:', classNames);
       console.log('settings:', settings);
       console.log('templates:', templates);
+      thisApp.initData();
+      thisApp.initMenu();
     },
   };
 
