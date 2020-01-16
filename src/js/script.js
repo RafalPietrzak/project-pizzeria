@@ -1,4 +1,4 @@
-// /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
+/* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 
 {
   'use strict';
@@ -58,6 +58,7 @@
       thisProduct.id = id;
       thisProduct.data = data;
       thisProduct.rebderInMenu();
+      thisProduct.initAccordion();
       console.log('new product:', thisProduct);
     }
     rebderInMenu(){
@@ -66,6 +67,25 @@
       const menuContainer = document.querySelector(select.containerOf.menu);
       thisProduct.element = utils.createDOMFromHTML(ganeratedHTML);
       menuContainer.appendChild(thisProduct.element);
+    }
+    initAccordion(){
+      const thisProduct = this;
+      const triger = thisProduct.element.querySelector(
+        select.menuProduct.clickable
+      );
+      triger.addEventListener('click', function(){
+        thisProduct.element.classList.toggle(
+          classNames.menuProduct.wrapperActive
+        );
+        const activeProducts = document.querySelectorAll(
+          select.all.menuProductsActive
+        );
+        for (let activeProduct of activeProducts){
+          if(activeProduct != thisProduct.element){
+            activeProduct.classList.remove('active');
+          }
+        }
+      });
     }
   }
 
