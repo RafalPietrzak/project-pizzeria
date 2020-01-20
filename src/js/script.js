@@ -105,6 +105,9 @@
       thisProduct.priceElem = thisProduct.element.querySelector(
         select.menuProduct.priceElem
       );
+      thisProduct.imageWrapper = thisProduct.element.querySelector(
+        select.menuProduct.imageWrapper
+      );
     }
     initOrderForm() {
       const thisProduct = this;
@@ -138,6 +141,16 @@
             productPrice += price;
           }else if(!isActive && isDefault){
             productPrice -= price;
+          }
+          const images = thisProduct.imageWrapper.querySelectorAll(
+            '.'+ param +'-'+ option
+          );
+          for(let image of images){
+            if(isActive && image != undefined){
+              image.classList.add(classNames.menuProduct.imageVisible);
+            }else if (image != undefined){
+              image.classList.remove(classNames.menuProduct.imageVisible);
+            }
           }
         }
       }
