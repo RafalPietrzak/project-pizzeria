@@ -141,11 +141,7 @@
           }
         }
       }
-      thisProduct.priceElem = productPrice;
-      console.log('productPrice:', productPrice);
-      //console.log('data', thisProduct.data);
-      //console.log('formData:', formData);
-      //console.log('name:', thisProduct.data.name, ', price:',thisProduct.data.price);
+      thisProduct.priceElem.innerHTML = productPrice;
     }
   }
 
