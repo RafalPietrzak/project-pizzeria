@@ -125,8 +125,27 @@
     processOrder() {
       const thisProduct = this;
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log(formData);
-      console.log('processOrder');
+      const params = thisProduct.data.params;
+      let productPrice = thisProduct.data.price;
+      for(let param in params){
+        for(let option in params[param].options){
+          const optionData =  params[param].options[option];
+          const isDefault = ('default' in optionData)? true : false;
+          const isActive = (param in formData) 
+            ? formData[param].includes(option) : false;
+          const price = optionData.price;
+          if(isActive && !isDefault){
+            productPrice += price;
+          }else if(!isActive && isDefault){
+            productPrice -= price;
+          }
+        }
+      }
+      thisProduct.priceElem = productPrice;
+      console.log('productPrice:', productPrice);
+      //console.log('data', thisProduct.data);
+      //console.log('formData:', formData);
+      //console.log('name:', thisProduct.data.name, ', price:',thisProduct.data.price);
     }
   }
 
