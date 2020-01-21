@@ -67,7 +67,10 @@
       defaultValue: 1,
       defaultMin: 1,
       defaultMax: 9
-    }
+    },
+    cart: {
+      defaultDeliveryFee: 20,
+    },
   };
 
   const templates = {
@@ -276,6 +279,7 @@
       thisCart.products = [];
       thisCart.getElements(elelment);
       thisCart.initAction();
+      thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
       // console.log('new Cart', thisCart);
     }
     getElements(element) {
@@ -288,6 +292,17 @@
       thisCart.productList = thisCart.dom.wrapper.querySelector(
         select.cart.productList
       );
+      thisCart.renderTotalsKeys = [
+        'totalNumber', 
+        'totalPrice', 
+        'subtotalPrice', 
+        'deliveryFee'
+      ];
+      for(let key of thisCart.renderTotalsKeys){
+        thisCart.dom[key] = thisCart.dom.wrapper.querySelectorAll(
+          select.cart[key]
+        );
+      }
     }
     initAction() {
       const thisCart = this;
@@ -303,6 +318,25 @@
       thisCart.products.push(
         new CartProduct(menuProduct, generateDOM)
       );
+      thisCart.update();
+    }
+    update(){
+      const thisCart = this;
+      thisCart.totalNumber = 0;
+      thisCart.subtotalPrice = 0;
+      for(let product of thisCart.products){
+        thisCart.subtotalPrice += product.price;
+        thisCart.totalNumber += product.amount;
+      }
+      thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
+      console.log(
+        thisCart.totalPrice, thisCart.subtotalPrice, thisCart.totalNumber
+      );
+      for (let key of thisCart.renderTotalsKeys){
+        for (let elem of thisCart.dom[key]){
+          elem.innerHTML = thisCart[key];
+        }
+      }
     }
   }
   class CartProduct {
