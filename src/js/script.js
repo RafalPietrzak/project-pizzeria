@@ -130,25 +130,25 @@
       const formData = utils.serializeFormToObject(thisProduct.form);
       const params = thisProduct.data.params;
       let productPrice = thisProduct.data.price;
-      for(let param in params){
-        for(let option in params[param].options){
+      for (let param in params) {
+        for (let option in params[param].options) {
           const optionData =  params[param].options[option];
-          const isDefault = ('default' in optionData)? true : false;
+          const isDefault = ('default' in optionData) ? true : false;
           const isActive = (param in formData) 
             ? formData[param].includes(option) : false;
           const price = optionData.price;
-          if(isActive && !isDefault){
+          if (isActive && !isDefault){
             productPrice += price;
-          }else if(!isActive && isDefault){
+          } else if (!isActive && isDefault) {
             productPrice -= price;
           }
           const images = thisProduct.imageWrapper.querySelectorAll(
             '.'+ param +'-'+ option
           );
-          for(let image of images){
-            if(isActive && image != undefined){
+          for (let image of images) {
+            if (isActive && image != undefined) {
               image.classList.add(classNames.menuProduct.imageVisible);
-            }else if (image != undefined){
+            } else if (image != undefined) {
               image.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
