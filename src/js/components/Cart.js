@@ -3,10 +3,10 @@ import {utils} from '../utils.js';
 import CartProduct from './CartProduct.js';
 
 class Cart {
-  constructor(elelment) {
+  constructor(element) {
     const thisCart = this;
     thisCart.products = [];
-    thisCart.getElements(elelment);
+    thisCart.getElements(element);
     thisCart.initAction();
     thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
     // console.log('new Cart', thisCart);
