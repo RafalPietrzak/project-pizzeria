@@ -21,9 +21,29 @@ class DatePicker extends BaseWiget {
     );
     flatpickr(thisWidget.dom.input, {
       defaultDate: thisWidget.minDate,
-
+      minDate: thisWidget.minDate,
+      maxDate: thisWidget.maxDate,
+      locale: {
+        firstDayOfWeek: 1,
+      },
+      disable: [
+        function(date){
+          return (date.getDay() === 1);
+        }
+      ],
+      onChange: function(selectedDates, dateStr, instance) {
+        thisWidget.value = dateStr;
+      },
     });
-
+  }
+  parseValue(value){
+    return value;
+  }
+  isValid(){
+    return true;  
+  }
+  renderValue(){
+    //thisWidget.dom.wrapper.innerHTML =  thisWidget.value;
   }
 }
 export default DatePicker;
