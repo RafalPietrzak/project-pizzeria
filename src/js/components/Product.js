@@ -123,7 +123,6 @@ class Product {
     thisProduct.price = thisProduct.priceSingle 
     * thisProduct.amountWidget.value;
     thisProduct.priceElem.innerHTML = thisProduct.price;
-    console.log(thisProduct.params);
   }
   initAmountWidget() {
     const thisProduct = this;
