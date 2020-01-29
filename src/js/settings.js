@@ -1,6 +1,11 @@
 /* global Handlebars */
 
 export const select = {
+  header: {
+    wrapper: '.header__wrapper',
+    mainNav: '.main-nav',
+    cart: '.cart' 
+  },
   templateOf: {
     menuProduct: '#template-menu-product',
     cartProduct: '#template-cart-product',
@@ -91,6 +96,9 @@ export const classNames = {
   pages: {
     active: 'active',
   },
+  header: {
+    hidden: 'hidden',
+  }
 };
 
 export const settings = {

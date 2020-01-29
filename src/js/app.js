@@ -14,6 +14,10 @@ const app = {
     const thisApp = this;
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
+    thisApp.header = {};
+    thisApp.header.wrapper = document.querySelector(select.header.wrapper);
+    thisApp.header.cart = thisApp.header.wrapper.querySelector(select.header.cart);
+    thisApp.header.mainNav = thisApp.header.wrapper.querySelector(select.header.mainNav);
     const idFromHash = window.location.hash.replace('#/', '');
     let pageMatcingHash = thisApp.pages[0].id;
     for (let page of thisApp.pages){
@@ -47,6 +51,19 @@ const app = {
         (link.getAttribute('href') == '#' + pageId)
       );
     }
+    switch(pageId){
+    case 'home':
+      thisApp.header.cart.classList.add(classNames.header.hidden);
+      thisApp.header.mainNav.classList.remove(classNames.header.hidden);
+      break;
+    case 'order':
+      thisApp.header.cart.classList.remove(classNames.header.hidden);
+      thisApp.header.mainNav.classList.remove(classNames.header.hidden);
+      break;  
+    case 'booking':
+      thisApp.header.cart.classList.add(classNames.header.hidden);
+      thisApp.header.mainNav.classList.remove(classNames.header.hidden);
+    }
   },
   initData: function () {
     const thisApp = this;
@@ -55,7 +72,6 @@ const app = {
     fetch(url).then(function(rawResponse){
       return rawResponse.json();
     }).then(function (parsedResponse){
-      console.log('parsedResponse', parsedResponse);
       thisApp.data.products = parsedResponse;
       thisApp.initMenu();
     });

@@ -1,0 +1,74 @@
+.home-wrapper {
+  margin: ($base-size * 3.5) auto;
+  padding: ($base-size * 6) ($base-size * 4);
+  background: $color-light;
+  border-bottom: 1px solid lighten($color-dark, 70%);
+  border-radius: $radius;
+}
+
+.home-menu{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &__box{ 
+    display: flex;
+    flex: 30%;
+    min-height: 120px;
+    position: relative;
+    margin: 3px;
+    background-color: $color-main;
+    border-radius: $radius;
+    overflow: hidden;
+  }
+
+  &__box--full-width{
+    flex: 100%;
+  }
+
+  &__image{
+    height: 120px;
+  }
+
+  &__img{
+    width: 100%;
+    min-width: 200px;
+    object-fit: cover;
+  }
+
+  &__description{
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+  }
+  
+  &__title{
+    color: $color-light;
+    font-family: $font-header;
+    font-weight: $font-bold;
+    font-size: $base-size * 1.7;
+    transform: translateY(30px);
+    transition: $transition;
+  }
+
+  &__text{
+    color: $color-light;
+    font-family: $font-text;
+    font-weight: $font-normal;
+    font-size: $base-size;
+    transform: translateY(50px);
+    transition: $transition;
+  }
+  
+  &__box:hover &__title{
+    transform: translateY(10px);
+  }
+
+  &__box:hover &__text{
+    transform: translateY(0px);
+  } 
+
+}
