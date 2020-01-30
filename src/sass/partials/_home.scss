@@ -70,5 +70,33 @@
   &__box:hover &__text{
     transform: translateY(0px);
   } 
+}
 
+.opinion{
+  margin-top: 60px;
+  
+  &__box {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    transition: $transition;
+  }
+
+  &__image {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  &__img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  &__description {
+    width: 300px;
+    margin-left: 20px;
+  }
+  
 }
