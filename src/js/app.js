@@ -2,7 +2,7 @@ import {settings, select, classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
-
+import Opinions from './components/Opinions.js';
 
 const app = {
   initBooking: function () {
@@ -95,6 +95,12 @@ const app = {
       app.cart.add(event.detail.product);
     });
   },
+  initOpinions: function () {
+    const thisApp = this;
+    const wrapper = document.querySelector(select.opinions.wrapper);
+    const url = settings.db.url + '/' + settings.db.opinions;
+    thisApp.opinions = new Opinions(wrapper, url);
+  },
   init: function () {
     const thisApp = this;
     thisApp.initPages();
@@ -107,6 +113,7 @@ const app = {
     //thisApp.initMenu();
     thisApp.initCart();
     thisApp.initBooking();
+    thisApp.initOpinions();
 
   },
 };

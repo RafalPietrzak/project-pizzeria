@@ -74,13 +74,24 @@
 
 .opinion{
   margin-top: 60px;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
   
   &__box {
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: flex-start;
     transition: $transition;
+  }
+
+  &__box--visible{
+    left: 100%;
+    z-index: 100;
   }
 
   &__image {
@@ -98,5 +109,5 @@
     width: 300px;
     margin-left: 20px;
   }
-  
+
 }

@@ -274,5 +274,25 @@
         "ppl": 3,
         "starters": []
         }
+    ],
+    "opinions": [
+      {
+        "id": 1,
+        "image": "/images/home/pizza-3.jpg",
+        "title": "AMAZING SERVICE!",
+        "text": "1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales."
+      },
+      {
+        "id": 2,
+        "image": "/images/home/pizza-4.jpg",
+        "title": "DELICIOUS FOOD!",
+        "text": "2Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales."
+      },
+      {
+        "id": 3,
+        "image": "/images/home/pizza-5.jpg",
+        "title": "GREAT ATMOSPHERE!",
+        "text": "3Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales."
+      }
     ]
   }

@@ -10,6 +10,7 @@ export const select = {
     menuProduct: '#template-menu-product',
     cartProduct: '#template-cart-product',
     bookingWidget: '#template-booking-widget',
+    opinions: '#template-opinion-widget',
   },
   containerOf: {
     menu: '#product-list',
@@ -45,6 +46,11 @@ export const select = {
       input: 'input[type="range"]',
       output: '.output',
     },
+  },
+  opinions: {
+    wrapper: '.opinion-wrapper',
+    opinion: '.opinion__box',
+    menu: '.opinion__menu'
   },
   cart: {
     productList: '.cart__order-summary',
@@ -130,11 +136,21 @@ export const settings = {
     dateEndParamKey: 'date_lte',
     notRepeatParam: 'repeat=false',
     repeatParam: 'repeat_ne=false',
+    opinions: 'opinions',
   },
 };
 
 export const templates = {
-  menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
-  cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
-  bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
+  menuProduct: Handlebars.compile(
+    document.querySelector(select.templateOf.menuProduct).innerHTML
+  ),
+  cartProduct: Handlebars.compile(
+    document.querySelector(select.templateOf.cartProduct).innerHTML
+  ),
+  bookingWidget: Handlebars.compile(
+    document.querySelector(select.templateOf.bookingWidget).innerHTML
+  ),
+  opinions: Handlebars.compile(
+    document.querySelector(select.templateOf.opinions).innerHTML
+  ),
 };
