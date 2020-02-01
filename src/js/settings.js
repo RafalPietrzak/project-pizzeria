@@ -4,7 +4,7 @@ export const select = {
   header: {
     wrapper: '.header__wrapper',
     mainNav: '.main-nav',
-    cart: '.cart' 
+    cart: '.cart'
   },
   templateOf: {
     menuProduct: '#template-menu-product',
@@ -104,6 +104,9 @@ export const classNames = {
   },
   header: {
     hidden: 'hidden',
+  },
+  opinion: {
+    active: 'opinion__box--visible',
   }
 };
 

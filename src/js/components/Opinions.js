@@ -1,50 +1,79 @@
-import {select, templates} from '../settings.js';
+import { select, templates, classNames } from '../settings.js';
 import { utils } from '../utils.js';
 
 class Opinions {
-  constructor(wrapper, url){
+  constructor(wrapper, url) {
     const thisOpinions = this;
     thisOpinions.getDOM(wrapper);
-    thisOpinions.getData(url);    
+    thisOpinions.getData(url);
   }
-  getDOM(wrapper){
+  getDOM(wrapper) {
     const thisOpinions = this;
     thisOpinions.dom = {};
-    thisOpinions.dom.wrapper = wrapper; 
+    thisOpinions.dom.wrapper = wrapper;
     thisOpinions.dom.menu = thisOpinions.dom.wrapper.querySelector(
       select.opinions.menu
     );
   }
-  getData(url){
+  getData(url) {
     const thisOpinions = this;
     thisOpinions.data = {};
-    fetch(url).then(function(rawResponse){
+    fetch(url).then(function (rawResponse) {
       return rawResponse.json();
-    }).then(function (parsedResponse){
+    }).then(function (parsedResponse) {
       thisOpinions.data = parsedResponse;
       thisOpinions.initOpinion();
     });
   }
-  initOpinion(){
+  initOpinion() {
     const thisOpinions = this;
+    thisOpinions.activeOpinionIndex = undefined;
     thisOpinions.renderOpinions();
+    thisOpinions.setActive();
+    setInterval(function () {
+      thisOpinions.setActive();
+    }, 3000);
   }
-  renderOpinions(){
+  setActive() {
+    const thisOpinions = this;
+    if (
+      typeof thisOpinions.activeOpinionIndex == 'undefined'
+      ||
+      typeof thisOpinions.dom.opinions[thisOpinions.activeOpinionIndex + 1] == 'undefined'
+    ) {
+      thisOpinions.activeOpinionIndex = 0;
+      thisOpinions.dom.opinions[thisOpinions.activeOpinionIndex].classList.add(
+        classNames.opinion.active
+      );
+      thisOpinions.dom.opinions[
+        thisOpinions.dom.opinions.length - 1
+      ].classList.remove(
+        classNames.opinion.active
+      );
+    } else {
+      thisOpinions.dom.opinions[thisOpinions.activeOpinionIndex].classList.remove(
+        classNames.opinion.active
+      );
+      thisOpinions.activeOpinionIndex++;
+      thisOpinions.dom.opinions[thisOpinions.activeOpinionIndex].classList.add(
+        classNames.opinion.active
+      );
+    }
+  }
+  renderOpinions() {
     const thisOpinions = this;
     const data = {
-      opinions: {
-        jeden : 1,
-        dwa : 2,
-        trzy : 3,
-      } }
-       ;
-    console.log('data', data);
+      opinions: thisOpinions.data,
+      links: []
+    };
     const generateHTML = templates.opinions(data);
-    thisOpinions.dom.opinions = utils.createDOMFromHTML(
+    thisOpinions.dom.opinionsWidget = utils.createDOMFromHTML(
       generateHTML
     );
-    console.log('thisOpinions.dom.opinions', generateHTML);
-    thisOpinions.dom.wrapper.appendChild(thisOpinions.dom.opinions);
+    thisOpinions.dom.opinions = thisOpinions.dom.opinionsWidget.querySelectorAll(
+      select.opinions.opinion
+    );
+    thisOpinions.dom.wrapper.appendChild(thisOpinions.dom.opinionsWidget);
   }
 }
 export default Opinions;

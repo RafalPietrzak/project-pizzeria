@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
   <link rel="stylesheet" href="vendor/range-slider.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
   <header class="header">
@@ -62,10 +64,10 @@
     </div>
   </header>
   <div id="pages">
-    <section id="home" >
+    <section id="home">
       <div class="home-wrapper container">
         <article class="home-menu">
-          <div class = "home-menu__box">
+          <div class="home-menu__box">
             <div class="home-menu__image">
               <img class="home-menu__img" src="/images/home/pizza-1.jpg" alt="abstract image">
             </div>
@@ -74,7 +76,7 @@
               <p class="home-menu__text">Delicious food delivered to your door</p>
             </div>
           </div>
-          <div class = "home-menu__box">
+          <div class="home-menu__box">
             <div class="home-menu__image">
               <img class="home-menu__img" src="/images/home/pizza-2.jpg" alt="abstract image">
             </div>
@@ -83,14 +85,14 @@
               <p class="home-menu__text">Delicious food in beutyfull place</p>
             </div>
           </div>
-          <div class = "home-menu__box home-menu__box--full-width">
+          <div class="home-menu__box home-menu__box--full-width">
             <div class="home-menu__description">
               <h3 class="home-menu__title">OPENING HOURS:</h3>
               <p class="home-menu__text">TUE-SUN, 12PM - 12AM<br><br></p>
             </div>
           </div>
         </article>
-        <article class="opinion opinion-wrapper">
+        <article class="opinion-wrapper">
         </article>
         <article class="gallery-wrapper">
         </article>
@@ -104,36 +106,31 @@
     </section>
   </div>
   <script id="template-opinion-widget" type="text/x-handlebars-template">
-    <div>
-     {{log opinions}}
-    {{#each opinions}}
-    <p> {{@key}} </p>
-    {{log "debug logging" level="debug"}}
-    {{log @key}}
-    {{/each}}
+    <div class="opinion">
+      {{#each opinions}}
+      <div class="opinion__box" opinion={{ id }}>
+        <div class="opinion__image">
+          <img class="opinion__img" src={{ image }}>
+        </div>
+        <div class="opinion__description">
+          <h3 class="opinion__title">{{ title }}</h3>
+          <p class="opinion__text">
+            {{ text }}
+          </p>  
+          <p class="opinion__autor"> 
+          {{ author }}
+          </p>
+        </div>
+      </div> 
+      {{/each}}
+      <div>
+        <div class="opinion__menu">
+          <div class="opinion__circle"></div>
+          <div class="opinion__circle"></div>
+          <div class="opinion__circle"></div>
+        </div>
+      </div>
     </div>
-    
-    <!-- <div class="opinion__box" opinion={{ this }}>
-      <div class="opinion__image">
-        <img class="opinion__img" src={{ this }}>
-      </div>
-      <div class="opinion__description">
-        <h3 class="opinion__title">{{ @index }}</h3>
-        <p class="opinion__text">
-          {{ this }}
-        </p>  
-        <p class="opinion__autor"> 
-          – Margaret Osborne
-        </p>
-      </div>
-    </div> -->
-    <!-- <div>
-      <div class="opinion__menu">
-        <div class="opinion__circle"></div>
-        <div class="opinion__circle"></div>
-        <div class="opinion__circle"></div>
-      </div>
-    </div> -->
   </script>
   <script id="template-booking-widget" type="text/x-handlebars-template">
     <div class="booking-widget">
@@ -310,4 +307,5 @@
   <script src="vendor/range-slider.min.js"></script>
   <script src="js/app.js" type="module"></script>
 </body>
+
 </html>

@@ -81,7 +81,7 @@
   &__box {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 100%;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -90,7 +90,7 @@
   }
 
   &__box--visible{
-    left: 100%;
+    left: 0;
     z-index: 100;
   }
 
