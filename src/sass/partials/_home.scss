@@ -73,6 +73,7 @@
 }
 
 .opinion{
+  padding-top: 200px;
   margin-top: 60px;
   position: relative;
   overflow: hidden;
@@ -110,4 +111,23 @@
     margin-left: 20px;
   }
 
+  &__menu {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__circle {
+    display: inline-block;
+    margin: 10px;
+    width: 10px;
+    height: 10px;
+    background-color: $color-dark;
+    border-radius: 50%;
+    
+    &:hover {
+      width: 16px;
+      height: 16px;
+      margin: 7px;
+    }
+  }
 }

@@ -125,9 +125,9 @@
       {{/each}}
       <div>
         <div class="opinion__menu">
-          <div class="opinion__circle"></div>
-          <div class="opinion__circle"></div>
-          <div class="opinion__circle"></div>
+          {{#each links}}
+          <div class="opinion__circle" circle-id="{{ this }}"></div>
+          {{/each}}
         </div>
       </div>
     </div>

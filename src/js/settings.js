@@ -141,6 +141,9 @@ export const settings = {
     repeatParam: 'repeat_ne=false',
     opinions: 'opinions',
   },
+  opinions: {
+    circleId: 'circle-id',
+  }
 };
 
 export const templates = {

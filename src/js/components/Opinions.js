@@ -1,4 +1,4 @@
-import { select, templates, classNames } from '../settings.js';
+import { select, templates, classNames, settings } from '../settings.js';
 import { utils } from '../utils.js';
 
 class Opinions {
@@ -27,52 +27,63 @@ class Opinions {
   }
   initOpinion() {
     const thisOpinions = this;
-    thisOpinions.activeOpinionIndex = undefined;
     thisOpinions.renderOpinions();
     thisOpinions.setActive();
     setInterval(function () {
       thisOpinions.setActive();
     }, 3000);
   }
-  setActive() {
+  setActive(id = undefined) {
     const thisOpinions = this;
-    if (
-      typeof thisOpinions.activeOpinionIndex == 'undefined'
-      ||
-      typeof thisOpinions.dom.opinions[thisOpinions.activeOpinionIndex + 1] == 'undefined'
-    ) {
-      thisOpinions.activeOpinionIndex = 0;
-      thisOpinions.dom.opinions[thisOpinions.activeOpinionIndex].classList.add(
-        classNames.opinion.active
-      );
-      thisOpinions.dom.opinions[
-        thisOpinions.dom.opinions.length - 1
-      ].classList.remove(
-        classNames.opinion.active
-      );
+    if (typeof id == 'undefined') {
+      const active = thisOpinions.dom.opinions.shift();
+      active.classList.remove(classNames.opinion.active);
+      thisOpinions.dom.opinions[0].classList.add(classNames.opinion.active);
+      thisOpinions.dom.opinions.push(active);
     } else {
-      thisOpinions.dom.opinions[thisOpinions.activeOpinionIndex].classList.remove(
-        classNames.opinion.active
-      );
-      thisOpinions.activeOpinionIndex++;
-      thisOpinions.dom.opinions[thisOpinions.activeOpinionIndex].classList.add(
-        classNames.opinion.active
-      );
+      let i = 0;
+      do {
+        const active = thisOpinions.dom.opinions.shift();
+        if (id == active.getAttribute('opinion')) {
+          active.classList.add(classNames.opinion.active);
+          thisOpinions.dom.opinions.unshift(active);
+          i = thisOpinions.dom.opinions.length;
+        } else {
+          active.classList.remove(classNames.opinion.active);
+          thisOpinions.dom.opinions.push(active);
+          i++;
+        }
+      } while (i < thisOpinions.dom.opinions.length);
     }
   }
   renderOpinions() {
     const thisOpinions = this;
     const data = {
       opinions: thisOpinions.data,
-      links: []
+      links: [],
     };
+    for (let i = 0; i < thisOpinions.data.length; i++) {
+      data.links.push(i);
+    }
     const generateHTML = templates.opinions(data);
     thisOpinions.dom.opinionsWidget = utils.createDOMFromHTML(
       generateHTML
     );
-    thisOpinions.dom.opinions = thisOpinions.dom.opinionsWidget.querySelectorAll(
-      select.opinions.opinion
+    thisOpinions.dom.opinions = Array.from(
+      thisOpinions.dom.opinionsWidget.querySelectorAll(
+        select.opinions.opinion
+      )
     );
+    thisOpinions.dom.links = thisOpinions.dom.opinionsWidget.querySelector(
+      select.opinions.menu
+    ).children;
+    for (let link of thisOpinions.dom.links) {
+      link.addEventListener('click', function () {
+        thisOpinions.setActive(link.getAttribute(settings.opinions.circleId));
+      });
+    }
+
+    console.log(thisOpinions.dom.links);
     thisOpinions.dom.wrapper.appendChild(thisOpinions.dom.opinionsWidget);
   }
 }
