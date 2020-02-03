@@ -230,12 +230,18 @@ class Booking {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(payload),
     };
-    console.log(payload);
     fetch(url, options).then(function(response){
+      if (response.status === 404) {
+        return Promise.reject(response);
+      }
       return response.json();
     }).then(function(parseResponse){
+      // TODO : Display booking confirmation
       console.log('parseResponse', parseResponse);
       thisBooking.getData();
+    }).catch(function () {
+      const wrapper = document.querySelector(select.containerOf.booking);
+      new BugReport(wrapper, settings.bug.booking);
     });
   }
 }

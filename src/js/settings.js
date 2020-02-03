@@ -157,7 +157,7 @@ export const settings = {
   bug: {
     booking: {
       title: 'Server unavailable',
-      text: 'Server connection lost. Reservation is not possible. Please try again later.',
+      text: 'Please try later or booking by phone 555 555 555',
     },
     opinions: {
       title: 'DELICIOUS FOOD!',
@@ -166,6 +166,10 @@ export const settings = {
     gallery: {
       title: 'Lovely place',
       text: 'See our photos on instagram',
+    },
+    order: {
+      title: 'Order error',
+      text: 'Please try later or place your order by phone 555 555 555',
     }
   }
 };

@@ -1,6 +1,7 @@
 import {select, settings, classNames, templates} from '../settings.js';
 import {utils} from '../utils.js';
 import CartProduct from './CartProduct.js';
+import BugReport from './BugReport.js';
 
 class Cart {
   constructor(element) {
@@ -110,9 +111,16 @@ class Cart {
       body: JSON.stringify(payload),
     };
     fetch(url, options).then(function(response){
+      if (response.status === 404) {
+        return Promise.reject(response);
+      }
       return response.json();
     }).then(function(parseResponse){
+      // TODO : Display order confirmation
       console.log('parseResponse', parseResponse);
+    }).catch(function () {
+      const wrapper = document.querySelector(select.containerOf.menu);
+      new BugReport(wrapper, settings.bug.order);
     });
   }
 }
