@@ -45,6 +45,7 @@ class Booking {
   }
   initWidgets (){
     const thisBooking = this;
+    thisBooking.selectedTable = [];
     thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
@@ -58,7 +59,7 @@ class Booking {
         if(!isNaN(tableId)){
           tableId = parseInt(tableId);
         }
-        thisBooking.selectedTable = tableId;
+        thisBooking.selectedTable = thisBooking.selectedTable.concat([tableId]);
         thisBooking.updateDOM();
       });
     }  
@@ -122,7 +123,8 @@ class Booking {
       ]);
     }).then(function([bookings, eventsCurrent, eventsRepeat]){
       thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
-    }).catch(function () {
+    }).catch(function (allResponses) {
+      console.log(allResponses);
       const wrapper = document.querySelector(select.containerOf.booking);
       new BugReport(wrapper, settings.bug.booking);
     });
@@ -160,7 +162,7 @@ class Booking {
       ||
       thisBooking.hour != utils.hourToNumber(thisBooking.hourPicker.value)  
     ){
-      thisBooking.selectedTable = undefined;    
+      thisBooking.selectedTable = [];    
     }
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
@@ -183,7 +185,7 @@ class Booking {
         &&
         thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
         ||
-        thisBooking.selectedTable == tableId
+        thisBooking.selectedTable.includes(tableId)
       ){
         table.classList.add(classNames.booking.tableBooked);
       } else {
@@ -209,7 +211,9 @@ class Booking {
       if(typeof thisBooking.booked[date][hourBlock] == 'undefined'){
         thisBooking.booked[date][hourBlock] = [];  
       }
-      thisBooking.booked[date][hourBlock].push(table);
+      let tablesArray = thisBooking.booked[date][hourBlock];
+      tablesArray = tablesArray.concat(table);
+      thisBooking.booked[date][hourBlock] = tablesArray;
     }
   }
   sendOrder() {
