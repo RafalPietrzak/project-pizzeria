@@ -1,5 +1,6 @@
 import { select, templates, classNames, settings } from '../settings.js';
 import { utils } from '../utils.js';
+import BugReport from './BugReport.js';
 
 class Opinions {
   constructor(wrapper, url) {
@@ -19,10 +20,16 @@ class Opinions {
     const thisOpinions = this;
     thisOpinions.data = {};
     fetch(url).then(function (rawResponse) {
+      if (rawResponse.status === 404) {
+        return Promise.reject(rawResponse);
+      }
       return rawResponse.json();
     }).then(function (parsedResponse) {
       thisOpinions.data = parsedResponse;
       thisOpinions.initOpinion();
+    }).catch(function () {
+      const wrapper = document.querySelector(select.opinions.wrapper);
+      new BugReport(wrapper, settings.bug.opinions);
     });
   }
   initOpinion() {
@@ -82,7 +89,6 @@ class Opinions {
         thisOpinions.setActive(link.getAttribute(settings.opinions.circleId));
       });
     }
-    console.log(thisOpinions.dom.links);
     thisOpinions.dom.wrapper.appendChild(thisOpinions.dom.opinionsWidget);
   }
 }

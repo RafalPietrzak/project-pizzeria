@@ -66,7 +66,7 @@
   <div id="pages">
     <section id="home">
       <div class="home-wrapper container">
-        <article class="home-menu">
+        <article class="home-menu container">
           <div id="home-menu-order" class="home-menu__box">
             <div class="home-menu__image">
               <img class="home-menu__img" src="/images/home/pizza-1.jpg" alt="abstract image">
@@ -94,7 +94,7 @@
         </article>
         <article class="opinion-wrapper container">
         </article>
-        <article class="gallery-wrapper">
+        <article class="gallery-wrapper container">
         </article>
       </div>
     </section>
@@ -102,9 +102,19 @@
       <div id="product-list" class="product-list container"></div>
     </section>
     <section id="booking">
-      <div class="booking-wrapper container"></div>
+      <div class="booking-wrapper container">
+        
+      </div>
     </section>
   </div>
+  <script id="template-bug-hover" type="text/x-handlebars-template">
+  <div class="bug-report">
+    <div class="bug-report__box">
+      <h3 class="bug-report__title">{{ title }}</h3>
+      <p class="bug-report__text">{{ text }}</p>
+    </div>
+  </div>
+  </script>
   <script id="template-gallery-widget" type="text/x-handlebars-template">
     <div class="gallery">
       {{#each gallery}}

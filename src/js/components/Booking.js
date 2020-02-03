@@ -3,6 +3,7 @@ import {utils} from '../utils.js';
 import AmountWidget from './AmountWidget.js';
 import DatePicker from './DatePicker.js';
 import HourPicker from './HourPicker.js';
+import BugReport from './BugReport.js';
 
 class Booking {
   constructor(bookingWrapper) {
@@ -102,6 +103,15 @@ class Booking {
       fetch(urls.eventsCurrent),
       fetch(urls.eventsRepeat),
     ]).then(function(allResponses){
+      if (
+        allResponses[0].status === 404
+        ||
+        allResponses[1].status === 404
+        ||
+        allResponses[2].status === 404
+      ) {
+        return Promise.reject(allResponses);
+      }
       const bookingResponse = allResponses[0];
       const eventsCurrentResponse = allResponses[1];
       const eventsRepeatResponse = allResponses[2];
@@ -112,6 +122,9 @@ class Booking {
       ]);
     }).then(function([bookings, eventsCurrent, eventsRepeat]){
       thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
+    }).catch(function () {
+      const wrapper = document.querySelector(select.containerOf.booking);
+      new BugReport(wrapper, settings.bug.booking);
     });
   }
   parseData (bookings, eventsCurrent, eventsRepeat) {

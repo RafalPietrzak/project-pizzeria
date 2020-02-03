@@ -12,6 +12,7 @@ export const select = {
     bookingWidget: '#template-booking-widget',
     opinions: '#template-opinion-widget',
     gallery: '#template-gallery-widget',
+    bugReport: '#template-bug-hover',
   },
   containerOf: {
     menu: '#product-list',
@@ -152,6 +153,20 @@ export const settings = {
   },
   opinions: {
     circleId: 'circle-id',
+  },
+  bug: {
+    booking: {
+      title: 'Server unavailable',
+      text: 'Server connection lost. Reservation is not possible. Please try again later.',
+    },
+    opinions: {
+      title: 'DELICIOUS FOOD!',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.',
+    },
+    gallery: {
+      title: 'Lovely place',
+      text: 'See our photos on instagram',
+    }
   }
 };
 
@@ -171,4 +186,7 @@ export const templates = {
   gallery: Handlebars.compile(
     document.querySelector(select.templateOf.gallery).innerHTML
   ),
+  bugReport: Handlebars.compile(
+    document.querySelector(select.templateOf.bugReport).innerHTML
+  ), 
 };

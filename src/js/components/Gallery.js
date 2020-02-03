@@ -1,5 +1,6 @@
-import { templates } from '../settings.js';
+import { templates, select, settings } from '../settings.js';
 import { utils } from '../utils.js';
+import BugReport from '../components/BugReport.js';
 
 class Gallery {
   constructor(wrapper, url) {
@@ -16,10 +17,16 @@ class Gallery {
     const thisGallery = this;
     thisGallery.data = {};
     fetch(url).then(function (rawResponse) {
+      if (rawResponse.status === 404) {
+        return Promise.reject(rawResponse);
+      }
       return rawResponse.json();
     }).then(function (parsedResponse) {
       thisGallery.data = parsedResponse;
       thisGallery.initGallery();
+    }).catch(function () {
+      const wrapper = document.querySelector(select.gallery.wrapper);
+      new BugReport(wrapper, settings.bug.gallery);
     });
   }
   initGallery() {
@@ -31,7 +38,6 @@ class Gallery {
     const data = {
       gallery: thisGallery.data,
     };
-    console.log(data);
     const generateHTML = templates.gallery(data);
     thisGallery.dom.galleryWidget = utils.createDOMFromHTML(
       generateHTML
