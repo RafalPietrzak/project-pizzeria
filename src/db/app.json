@@ -312,5 +312,38 @@
       "text": "4Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.",
       "author": "Frank2"
     }
+  ],
+  "gallery": [
+    {
+      "id": 0,
+      "image": "/images/home/pizza-6.jpg",
+      "alt": "AMAZING SERVICE!"
+    },
+    {
+      "id": 1,
+      "image": "/images/home/pizza-7.jpg",
+      "alt": "AMAZING SERVICE!"
+    },
+    {
+      "id": 2,
+      "image": "/images/home/pizza-8.jpg",
+      "alt": "AMAZING SERVICE!"
+    },
+    {
+      "id": 3,
+      "image": "/images/home/pizza-9.jpg",
+      "alt": "AMAZING SERVICE!"
+    },
+    {
+      "id": 4,
+      "image": "/images/home/pizza-5.jpg",
+      "alt": "AMAZING SERVICE!"
+    },
+    {
+      "id": 5,
+      "image": "/images/home/pizza-4.jpg",
+      "alt": "AMAZING SERVICE!"
+    }
   ]
+
 }

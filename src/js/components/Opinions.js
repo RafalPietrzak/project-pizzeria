@@ -82,7 +82,6 @@ class Opinions {
         thisOpinions.setActive(link.getAttribute(settings.opinions.circleId));
       });
     }
-
     console.log(thisOpinions.dom.links);
     thisOpinions.dom.wrapper.appendChild(thisOpinions.dom.opinionsWidget);
   }

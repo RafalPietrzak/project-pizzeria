@@ -3,6 +3,7 @@ import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
 import Opinions from './components/Opinions.js';
+import Gallery from './components/Gallery.js';
 
 const app = {
   initBooking: function () {
@@ -54,7 +55,7 @@ const app = {
     switch(pageId){
     case 'home':
       thisApp.header.cart.classList.add(classNames.header.hidden);
-      thisApp.header.mainNav.classList.remove(classNames.header.hidden);
+      thisApp.header.mainNav.classList.add(classNames.header.hidden);
       break;
     case 'order':
       thisApp.header.cart.classList.remove(classNames.header.hidden);
@@ -95,11 +96,29 @@ const app = {
       app.cart.add(event.detail.product);
     });
   },
+  initHome: function () {
+    const thisApp = this;
+    const order = document.querySelector(select.homeMenu.order);
+    console.log('order', order);
+    order.addEventListener('click', function () {
+      thisApp.activatePage('order');
+    });
+    const booking = document.querySelector(select.homeMenu.booking);
+    booking.addEventListener('click', function () {
+      thisApp.activatePage('booking');
+    });
+  },
   initOpinions: function () {
     const thisApp = this;
     const wrapper = document.querySelector(select.opinions.wrapper);
     const url = settings.db.url + '/' + settings.db.opinions;
     thisApp.opinions = new Opinions(wrapper, url);
+  },
+  initGallery: function () {
+    const thisApp = this;
+    const wrapper = document.querySelector(select.gallery.wrapper);
+    const url = settings.db.url + '/' + settings.db.gallery;
+    thisApp.gallery = new Gallery(wrapper, url); 
   },
   init: function () {
     const thisApp = this;
@@ -113,8 +132,9 @@ const app = {
     //thisApp.initMenu();
     thisApp.initCart();
     thisApp.initBooking();
+    thisApp.initHome();
     thisApp.initOpinions();
-
+    thisApp.initGallery();
   },
 };
 

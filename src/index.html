@@ -67,7 +67,7 @@
     <section id="home">
       <div class="home-wrapper container">
         <article class="home-menu">
-          <div class="home-menu__box">
+          <div id="home-menu-order" class="home-menu__box">
             <div class="home-menu__image">
               <img class="home-menu__img" src="/images/home/pizza-1.jpg" alt="abstract image">
             </div>
@@ -76,7 +76,7 @@
               <p class="home-menu__text">Delicious food delivered to your door</p>
             </div>
           </div>
-          <div class="home-menu__box">
+          <div id="home-menu-booking" class="home-menu__box">
             <div class="home-menu__image">
               <img class="home-menu__img" src="/images/home/pizza-2.jpg" alt="abstract image">
             </div>
@@ -92,7 +92,7 @@
             </div>
           </div>
         </article>
-        <article class="opinion-wrapper">
+        <article class="opinion-wrapper container">
         </article>
         <article class="gallery-wrapper">
         </article>
@@ -105,6 +105,19 @@
       <div class="booking-wrapper container"></div>
     </section>
   </div>
+  <script id="template-gallery-widget" type="text/x-handlebars-template">
+    <div class="gallery">
+      {{#each gallery}}
+      <div class="gallery__box">
+        <img class="gallery__image" src="{{image}}" alt="{{alt}}">
+        <div class="gallery__hover">
+          <i class="fas fa-pizza-slice gallery__icon"></i>
+        </div>
+      </div>
+      {{/each}}
+      <a href="https://www.instagram.com/pizza/">View more on istagram</a>
+    </div>
+  </script>
   <script id="template-opinion-widget" type="text/x-handlebars-template">
     <div class="opinion">
       {{#each opinions}}

@@ -11,6 +11,7 @@ export const select = {
     cartProduct: '#template-cart-product',
     bookingWidget: '#template-booking-widget',
     opinions: '#template-opinion-widget',
+    gallery: '#template-gallery-widget',
   },
   containerOf: {
     menu: '#product-list',
@@ -82,6 +83,13 @@ export const select = {
   nav: {
     links: '.main-nav a',
   },
+  gallery: {
+    wrapper: '.gallery-wrapper',
+  },
+  homeMenu: {
+    booking: '#home-menu-booking',
+    order: '#home-menu-order',
+  }
 };
 
 export const classNames = {
@@ -140,6 +148,7 @@ export const settings = {
     notRepeatParam: 'repeat=false',
     repeatParam: 'repeat_ne=false',
     opinions: 'opinions',
+    gallery: 'gallery',
   },
   opinions: {
     circleId: 'circle-id',
@@ -158,5 +167,8 @@ export const templates = {
   ),
   opinions: Handlebars.compile(
     document.querySelector(select.templateOf.opinions).innerHTML
+  ),
+  gallery: Handlebars.compile(
+    document.querySelector(select.templateOf.gallery).innerHTML
   ),
 };
