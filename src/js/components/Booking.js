@@ -57,7 +57,7 @@ class Booking {
       table.addEventListener('click', function(){
         let tableId = table.getAttribute(settings.booking.tableIdAttribute);
         if(!isNaN(tableId)){
-          tableId = parseInt(tableId);
+          tableId = parseInt(tableId, 10);
         }
         thisBooking.selectedTable = thisBooking.selectedTable.concat([tableId]);
         thisBooking.updateDOM();
@@ -178,7 +178,7 @@ class Booking {
     for(let table of thisBooking.dom.tables){
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
       if(!isNaN(tableId)){
-        tableId = parseInt(tableId);
+        tableId = parseInt(tableId, 10);
       }
       if(
         !allAvailable

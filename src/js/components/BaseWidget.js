@@ -19,7 +19,7 @@ class BaseWiget {
     thisWidget.renderValue();
   }
   parseValue(value){
-    return parseInt(value);
+    return parseInt(value, 10);
   }
   isValid(value){
     return !isNaN(value);  
